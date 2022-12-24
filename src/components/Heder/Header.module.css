@@ -1,0 +1,11 @@
+.header {
+    grid-area: h;
+    background-image: url(../img/Rectangle.jpg);
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.header img {
+    width: 50px;
+    height: 50px;
+}
