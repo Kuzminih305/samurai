@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./Post.module.css";
+import Photo from '../../../img/photo_2022-07-09_11-29-57.jpg'
 
 
 type PostPropsType = {
@@ -8,14 +9,18 @@ type PostPropsType = {
 }
 
 const Post = (props: PostPropsType) => {
-    return <div className={s.item}>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnkXX1msb3FcwUKdveOb4VJ_8dlsezqUlqEQ&usqp=CAU"
-             alt=""/>
-        <h2>{props.message}</h2>
+    return (
         <div>
-            <h2>Likes: {props.likesCount}</h2>
+            <div className={s.item}>
+                <img src={Photo} alt=""/>
+                <p className={s.massage}>{props.message}</p>
+            </div>
+            <div className={s.like}>
+                <p>Likes: {props.likesCount}</p>
+            </div>
+
         </div>
-    </div>
+    )
 }
 
 export default Post;

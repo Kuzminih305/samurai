@@ -1,0 +1,22 @@
+textarea {
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 15px;
+    outline: none;
+    resize: none;
+}
+.btn {
+   padding: 8px;
+    margin-left: 10px;
+    border-radius: 15px;
+    outline: none;
+}
+.posts {
+    margin: 20px;
+
+}
+.post {
+    font-size: 25px;
+    margin: 10px;
+    padding-left: 10px;
+}

@@ -1,0 +1,24 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    max-width: 172px;
+    padding-left: 10px;
+    padding-top: 10px;
+
+}
+.dialogItems a {
+    text-decoration: none;
+    color: #F7654A;
+    line-height: 30px;
+}
+.dialog {
+
+
+}
+.massages {
+
+
+}
+.massage {
+
+}

@@ -12,5 +12,12 @@
   gap: 10px;
 }
 
+.app-wrapper-content {
+  background-image: url(components/img/Rectangle.jpg);
+  grid-area: c;
+  border-radius: 10px;
+}
+
+
 
 

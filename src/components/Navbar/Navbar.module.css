@@ -4,10 +4,14 @@
     border-radius: 10px;
 }
 .item {
-    color: #F7654A;
     text-align: center;
     margin: 0 auto;
     max-width: 172px;
     text-transform: uppercase;
     padding-top: 10px;
+
+}
+.item a {
+    text-decoration: none;
+    color: #F7654A;
 }
