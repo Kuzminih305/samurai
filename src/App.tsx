@@ -9,23 +9,32 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import classes from "./components/Dialogs/Dialogs.module.css";
 import {BrowserRouter, Route} from "react-router-dom";
-import {StateType} from "./redux/state";
+import {StateType, StoreType} from "./redux/state";
+// import {addPost} from "./redux/state";
 
 
 type AppPropsType = {
-    state: StateType
+    // state: StateType
+    store: StoreType
+    addPost: (postText: string) => void
 }
 
 
+
+
 const App = (props: AppPropsType) => {
+
+
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={'/Profile'} render={ () => <Profile state={props.state.profilePage}/> }/>
-                    <Route path={'/Dialogs'} render={ () => <Dialogs state={props.state.dialogPage}/> }/>
+                    <Route path={'/Profile'} render={ () => <Profile state={props.store._state.profilePage}
+                                                                        addPost={props.addPost}/> }/>
+                    <Route path={'/Dialogs'} render={ () => <Dialogs state={props.store._state.dialogPage}/> }/>
                     <Route path={'/News'} render={ () => <News/> }/>
                     <Route path={'/Music'} render={ () => <Music/> }/>
                     <Route path={'/Settings'} render={ () => <Settings/> }/>
