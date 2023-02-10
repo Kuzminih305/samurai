@@ -1,22 +1,22 @@
 import {v1} from "uuid";
-import {renderTree} from "../index";
 
 
-// let renderTree = () => {
-//     console.log("dsa")
-// }
-// export subscribe = (callBack: () => void) => {
-//     renderTree = callBack
-// }
+
+
 
 export type StoreType = {
     _state: StateType
-    addPost: (postText: string) => void
     getState: () => StateType
+    _onChange: () => void
+    subscribe: (callBack: () => void) => void
+    dispatch : (action: AddPostActionType) => void
+}
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    postText: string
 }
 
-
-const store: StoreType = {
+ export const store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -39,17 +39,34 @@ const store: StoreType = {
             ]
         }
     },
-    addPost(postText: string) {
-        const newPost: PostsType = {
-            id: v1(),
-            message: postText,
-            likesCount: 0
-        }
-        store._state.profilePage.postsData.push(newPost)
-        renderTree(store)
-    },
+    // addPost(postText: string) {
+    //     const newPost: PostsType = {
+    //         id: v1(),
+    //         message: postText,
+    //         likesCount: 0
+    //     }
+    //     this._state.profilePage.postsData.push(newPost)
+    //     this._onChange()
+    // },
     getState() {
-        return this._state
+        return this._state;
+    },
+    dispatch(action){
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsType = {
+                id: v1(),
+                message: action.postText,
+                likesCount: 0
+            }
+            store._state.profilePage.postsData.push(newPost)
+            this._onChange()
+        }
+    },
+    _onChange () {
+        console.log("dsa")
+    },
+    subscribe (callBack) {
+       this._onChange = callBack
     }
 }
 
@@ -85,4 +102,3 @@ export type DialogPageType = {
 
 
 
-export default store;

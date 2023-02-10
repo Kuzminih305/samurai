@@ -1,28 +1,28 @@
 import React, {useRef} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {PostsType} from "../../../redux/state";
+import {AddPostActionType, PostsType, StoreType} from "../../../redux/state";
 
 
 
 
 type arrPost = {
-    postsData: PostsType[]
-    addPost: (postText: string) => void
+    store: StoreType
+    dispatch: (action: AddPostActionType) => void
 
 }
 
 const MyPosts = (props: arrPost) => {
 
-const postsElement = props.postsData.map(el =>
+const postsElement = props.store._state.profilePage.postsData.map(el =>
     (<Post key={el.id} message={el.message} likesCount={el.likesCount}/>))
 
 
-    let postMessageRef = useRef<HTMLInputElement>(null)
+    let postMessageRef = useRef<HTMLInputElement>(null )
 
     const addPost = () => {
     if (postMessageRef.current) {
-        props.addPost(postMessageRef.current.value)
+        props.dispatch({type: "ADD-POST", postText: postMessageRef.current.value})
         postMessageRef.current.value = ''
     }
 }

@@ -1,18 +1,25 @@
-import {StoreType} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 import React from "react";
-import store from "./redux/state";
+import {AddPostActionType, store, StoreType} from "./redux/state";
+import {BrowserRouter} from "react-router-dom";
 
 
 
-export let renderTree = (store:StoreType) => {
+
+
+export let renderTree = () => {
     ReactDOM.render(
-        <App store={store} addPost={store.addPost}/>,
-        document.getElementById('root')
-    );
+        <BrowserRouter>
+            <App store={store}/>,
+        </BrowserRouter> ,document.getElementById('root'));
 }
-renderTree(store)
+
+
+
+store.subscribe(renderTree)
+renderTree()
+
 
 
 
