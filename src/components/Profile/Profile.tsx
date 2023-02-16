@@ -1,12 +1,12 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {AddPostActionType, store, StoreType} from "../../redux/state";
+import {ActionsTypes, store, StoreType} from "../../redux/state";
 
 
 type ProfilesPageType = {
     store: StoreType
-    dispatch: (action: AddPostActionType) => void
+    dispatch: (action: ActionsTypes) => void
 
 }
 const Profile = (props:ProfilesPageType) => {

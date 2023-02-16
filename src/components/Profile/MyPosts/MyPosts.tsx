@@ -1,44 +1,46 @@
-import React, {useRef} from "react";
+import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {AddPostActionType, PostsType, StoreType} from "../../../redux/state";
-
-
+import {ActionsTypes, addPostAC, StoreType, updateNewPostMessageTextAC} from "../../../redux/state";
 
 
 type arrPost = {
     store: StoreType
-    dispatch: (action: AddPostActionType) => void
+    dispatch: (action: ActionsTypes) => void
 
 }
+
 
 const MyPosts = (props: arrPost) => {
 
-const postsElement = props.store._state.profilePage.postsData.map(el =>
-    (<Post key={el.id} message={el.message} likesCount={el.likesCount}/>))
+    const postsElement = props.store._state.profilePage.postsData.map(el =>
+        (<Post key={el.id} message={el.message} likesCount={el.likesCount}/>))
 
 
-    let postMessageRef = useRef<HTMLInputElement>(null )
+    const newMessagePost = props.store._state.profilePage.newPostText;
 
-    const addPost = () => {
-    if (postMessageRef.current) {
-        props.dispatch({type: "ADD-POST", postText: postMessageRef.current.value})
-        postMessageRef.current.value = ''
+    const onClickHandler = () => {
+        props.dispatch(addPostAC())
     }
-}
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        let postText = e.currentTarget.value
+        props.dispatch(updateNewPostMessageTextAC(postText))
+    }
 
 
     return (
         <div>
             <div>
                 <div className={s.post}>My posts:</div>
-                <input ref={postMessageRef}></input>
-                <button className={s.btn} onClick={addPost}>Add post</button>
+                <input
+                    type={"text"}
+                    value={newMessagePost}
+                    onChange={onChangeHandler}
+                />
+                <button className={s.btn} onClick={onClickHandler}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postsElement}
-                {/*<Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>*/}
-                {/*<Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>*/}
             </div>
         </div>
     )
