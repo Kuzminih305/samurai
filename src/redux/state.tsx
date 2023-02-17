@@ -1,9 +1,8 @@
 import {v1} from "uuid";
+import {AddPostActionType, profileReducer, UpdateNewPostMessageTextType} from "./profile-reducer";
+import {dialogReducer, SendMessageType, UpdateNewMessageTextType} from "./dialog-reducer";
 
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_MESSAGE_TEXT = "UPDATE_NEW_POST_MESSAGE_TEXT";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
-const SEND_MESSAGE = "SEND_MESSAGE";
+
 
 
 export type StoreType = {
@@ -15,36 +14,6 @@ export type StoreType = {
 }
 
 export type ActionsTypes = AddPostActionType | UpdateNewMessageTextType | SendMessageType | UpdateNewPostMessageTextType
-
-
-type AddPostActionType = ReturnType<typeof addPostAC>
-type UpdateNewMessageTextType = ReturnType<typeof updateNewMessageTextAC>
-type SendMessageType = ReturnType<typeof sendMessageAC>
-type UpdateNewPostMessageTextType = ReturnType<typeof updateNewPostMessageTextAC>
-
-
-export const addPostAC = () => {
-    return {
-        type: "ADD-POST",
-    }as const
-}
-export const updateNewPostMessageTextAC = (postMess: string) => {
-    return {
-        type: "UPDATE_NEW_POST_MESSAGE_TEXT",
-        postMess: postMess
-    }as const
-}
-export const updateNewMessageTextAC = (body: string) => {
-    return {
-        type: "UPDATE_NEW_MESSAGE_TEXT",
-        body: body
-    }as const
-}
-export const sendMessageAC = () => {
-    return {
-        type: "SEND_MESSAGE",
-    }as const
-}
 
 
  export const store: StoreType = {
@@ -71,42 +40,13 @@ export const sendMessageAC = () => {
             newMessageText: ""
         }
     },
-    // addPost(postText: string) {
-    //     const newPost: PostsType = {
-    //         id: v1(),
-    //         message: postText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.postsData.push(newPost)
-    //     this._onChange()
-    // },
     getState() {
         return this._state;
     },
     dispatch(action:ActionsTypes){
-        if (action.type === ADD_POST) {
-            let postMess = this._state.profilePage.newPostText;
-            const newPost: PostsType =
-                {
-                    id: v1(),
-                    message: postMess,
-                    likesCount: 0
-                }
-                this._state.profilePage.newPostText = ''
-            this._state.profilePage.postsData.push(newPost)
-            this._onChange()
-        }else if (action.type === UPDATE_NEW_POST_MESSAGE_TEXT) {
-            this._state.profilePage.newPostText = action.postMess
-            this._onChange()
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogPage.newMessageText = action.body;
-            this._onChange()
-        }else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialogPage.newMessageText;
-            this._state.dialogPage.newMessageText = '';
-            this._state.dialogPage.messagesData.push({id: v1(), message: body});
-            this._onChange();
-        }
+       this._state.profilePage = profileReducer(this._state.profilePage, action)
+       this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._onChange()
     },
     _onChange () {
         console.log("dsa")
