@@ -1,31 +1,31 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {ActionsTypes, StoreType} from "../../../redux/state";
-import {addPostAC, updateNewPostMessageTextAC} from "../../../redux/profile-reducer";
+import {ProfilePageType} from "../../../redux/store";
+
 
 
 type arrPost = {
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
-
+    profilePageState: ProfilePageType
+    onAddPostAC: () => void
+    onUpdateNewPostMessageTextAC: (postMess: string) => void
 }
 
 
 const MyPosts = (props: arrPost) => {
 
-    const postsElement = props.store._state.profilePage.postsData.map(el =>
+    const postsElement = props.profilePageState.postsData.map(el =>
         (<Post key={el.id} message={el.message} likesCount={el.likesCount}/>))
 
-
-    const newMessagePost = props.store._state.profilePage.newPostText;
+    const newMessagePost = props.profilePageState.newPostText;
 
     const onClickHandler = () => {
-        props.dispatch(addPostAC())
+        props.onAddPostAC()
     }
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let postText = e.currentTarget.value
-        props.dispatch(updateNewPostMessageTextAC(postText))
+        props.onUpdateNewPostMessageTextAC(postText)
     }
 
 
