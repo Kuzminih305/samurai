@@ -1,5 +1,6 @@
-import {AddPostActionType, UpdateNewPostMessageTextType} from "./profile-reducer";
-import {SendMessageType, UpdateNewMessageTextType} from "./dialog-reducer";
+import {AddPostActionType, ProfilePageType, UpdateNewPostMessageTextType} from "./profile-reducer";
+import {DialogPageType, SendMessageType, UpdateNewMessageTextType} from "./dialog-reducer";
+
 
 
 
@@ -7,8 +8,8 @@ import {SendMessageType, UpdateNewMessageTextType} from "./dialog-reducer";
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    _onChange: () => void
-    subscribe: (callBack: () => void) => void
+    _onChange: (state:StateType) => void
+    subscribe: (callBack: (state: StateType) => void) => void
     dispatch : (action: ActionsTypes) => void
 }
 
@@ -60,31 +61,31 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
 }
-export type PostsType = {
-    id: string
-    message: string
-    likesCount: number
-}
-export type DialogType = {
-    id: string
-    name: string
-}
-export type MessageType = {
-    id: string
-    message: string
-}
-export type ProfilePageType = {
-    postsData: PostsType[]
-    newPostText: AddNewPostMessage
-}
-export type DialogPageType = {
-    dialogData: DialogType[]
-    messagesData: MessageType[]
-    newMessageText: NewMessageTextType
-
- }
-export type NewMessageTextType = string
-export type AddNewPostMessage = string
+// export type PostsType = {
+//     id: string
+//     message: string
+//     likesCount: number
+// }
+// export type DialogType = {
+//     id: string
+//     name: string
+// }
+// export type MessageType = {
+//     id: string
+//     message: string
+// }
+// export type ProfilePageType = {
+//     postsData: PostsType[]
+//     newPostText: AddNewPostMessage
+// }
+// export type DialogPageType = {
+//     dialogData: DialogType[]
+//     messagesData: MessageType[]
+//     newMessageText: NewMessageTextType
+//
+//  }
+// export type NewMessageTextType = string
+// export type AddNewPostMessage = string
 
 
 

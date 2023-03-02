@@ -1,6 +1,7 @@
 .header {
+    background-color: dimgrey;
     grid-area: h;
-    background-image: url(../img/Rectangle.jpg);
+    /*background-image: url(../img/Rectangle.jpg);*/
     border-radius: 10px;
     padding-top: 5px;
     padding-left: 5px;

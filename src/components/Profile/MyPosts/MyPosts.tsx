@@ -1,23 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {ProfilePageType} from "../../../redux/store";
+import {MyPostsPropsType} from "./Post/MyPostsContainer";
 
-
-
-type arrPost = {
-    profilePageState: ProfilePageType
-    onAddPostAC: () => void
-    onUpdateNewPostMessageTextAC: (postMess: string) => void
-}
-
-
-const MyPosts = (props: arrPost) => {
-
-    const postsElement = props.profilePageState.postsData.map(el =>
+const MyPosts = (props: MyPostsPropsType) => {
+    const postsElement = props.profilePage.postsData.map(el =>
         (<Post key={el.id} message={el.message} likesCount={el.likesCount}/>))
 
-    const newMessagePost = props.profilePageState.newPostText;
+    const newMessagePost = props.profilePage.newPostText;
 
     const onClickHandler = () => {
         props.onAddPostAC()
@@ -33,7 +23,7 @@ const MyPosts = (props: arrPost) => {
         <div>
             <div>
                 <div className={s.post}>My posts:</div>
-                <input
+                <input className={s.inp}
                     type={"text"}
                     value={newMessagePost}
                     onChange={onChangeHandler}

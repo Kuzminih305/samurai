@@ -1,14 +1,15 @@
 .mav {
     grid-area: n;
-    background-image: url(../img/Rectangle.jpg);
+    background-color: dimgrey;
+    /*background-image: url(../img/Rectangle.jpg);*/
     border-radius: 10px;
 }
 .item {
     text-align: center;
     margin: 0 auto;
     max-width: 172px;
-    text-transform: uppercase;
     padding-top: 10px;
+    font-size: 20px;
 
 }
 .item a {

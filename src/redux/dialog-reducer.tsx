@@ -5,6 +5,21 @@ import {ActionsTypes} from "./store";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
 const SEND_MESSAGE = "SEND_MESSAGE";
 
+export type DialogType = {
+    id: string
+    name: string
+}
+export type MessageType = {
+    id: string
+    message: string
+}
+export type NewMessageTextType = string
+export type DialogPageType = {
+    dialogData: DialogType[]
+    messagesData: MessageType[]
+    newMessageText: NewMessageTextType
+
+}
 
 let initialState = {
     dialogData: [
@@ -20,16 +35,16 @@ let initialState = {
     newMessageText: ""
 }
 
-export const dialogReducer = (state = initialState, action: ActionsTypes) => {
+export const dialogReducer = (state: DialogPageType = initialState, action: ActionsTypes): DialogPageType => {
     switch (action.type) {
+
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.body
-            return state
+            return {...state, newMessageText: action.body}
+
         case SEND_MESSAGE:
             let body = state.newMessageText;
-            state.newMessageText = '';
-            state.messagesData.push({id: v1(), message: body});
-            return state
+            return {...state, newMessageText: "", messagesData: [...state.messagesData, {id: v1(), message: body}]}
+
         default:
             return state
     }

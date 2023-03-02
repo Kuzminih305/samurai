@@ -1,0 +1,72 @@
+
+.wrap {
+    display: flex;
+    gap: 10px;
+    width: 1080px;
+    justify-content: flex-start;
+    box-shadow: rgb(99 99 99 / 40%) 0 2px 8px 0;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+
+.ava_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border-right: 1px solid black;*/
+    padding: 10px;
+}
+.avatar img {
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 40%;
+    width: 80px;
+    height: 80px;
+}
+.btn_unfollow {
+    width: 80px;
+    background-color: red;
+    height: 25px;
+    color: #e1e8ed;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn_follow {
+    width: 80px;
+    background-color: green;
+    height: 25px;
+    color: #e1e8ed;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+}
+
+.info_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfo {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/*.location {*/
+/*    padding: 10px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: flex-end;*/
+/*    height: 100%;*/
+/*}*/
+

@@ -1,9 +1,20 @@
 import {v1} from "uuid";
-import {ActionsTypes, PostsType} from "./store";
+import {ActionsTypes} from "./store";
 
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_MESSAGE_TEXT = "UPDATE_NEW_POST_MESSAGE_TEXT";
+
+export type AddNewPostMessage = string
+export type PostsType = {
+    id: string
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    postsData: PostsType[]
+    newPostText: AddNewPostMessage
+}
 
 let initialState = {
     postsData: [
@@ -15,24 +26,24 @@ let initialState = {
 }
 
 
-export const profileReducer = (state = initialState, action: ActionsTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
+
         case ADD_POST:
-            let postMess = state.newPostText;
             const newPost: PostsType =
                 {
                     id: v1(),
-                    message: postMess,
+                    message: state.newPostText,
                     likesCount: 0
                 }
-            state.newPostText = ''
-            state.postsData.push(newPost)
-            return state
+            return {...state, postsData: [...state.postsData, newPost], newPostText: ''}
+
         case UPDATE_NEW_POST_MESSAGE_TEXT:
-            state.newPostText = action.postMess
-            return state
+            return {...state, newPostText: action.postMess}
+
         default:
             return state
+
     }
 }
 
@@ -42,11 +53,11 @@ export type UpdateNewPostMessageTextType = ReturnType<typeof updateNewPostMessag
 export const addPostAC = () => {
     return {
         type: "ADD-POST",
-    }as const
+    } as const
 }
 export const updateNewPostMessageTextAC = (postMess: string) => {
     return {
         type: "UPDATE_NEW_POST_MESSAGE_TEXT",
         postMess: postMess
-    }as const
+    } as const
 }
