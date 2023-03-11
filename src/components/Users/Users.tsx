@@ -9,7 +9,7 @@ export const Users = (props: MyUsersPropsType) => {
 
 
 const getUsers = () => {
-    if (props.usersPage.users.length === 0) {
+    if (props.usersPage.length === 0) {
         // props.setUsers([
         //         {
         //             id: v1(),
@@ -49,7 +49,7 @@ const getUsers = () => {
     return (
         <div>
             <button onClick={getUsers}>Get Users</button>
-            {props.usersPage.users.map(el => {
+            {props.usersPage.map(el => {
 
 
                 const onClickFollowHandler = () => {
