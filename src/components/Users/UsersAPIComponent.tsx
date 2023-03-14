@@ -1,8 +1,8 @@
 import React from 'react';
 import {MyUsersPropsType} from "./UsersContainer";
 import axios from "axios";
-
 import UsersFC from "./UsersFC";
+import Preloader from "../common/preloader/Preloader";
 
 
 export class UsersAPIComponent extends React.Component<MyUsersPropsType> {
@@ -26,6 +26,7 @@ export class UsersAPIComponent extends React.Component<MyUsersPropsType> {
 
     render() {
         return <div>
+            {this.props.isFetching ? <Preloader/> : null}
             <UsersFC totalUsersCount={this.props.totalUsersCount}
                      pageSize={this.props.pageSize}
                      onPageChanged={this.onPageChanged}

@@ -1,23 +1,35 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css";
-import Phon from "../../img/stock-photo-abstract-grey-orange-polygonal-background.jpg";
-import Photo from "../../img/photo_2022-07-09_11-29-57.jpg";
+import Phone from "../../img/stock-photo-abstract-grey-orange-polygonal-background.jpg";
+import {ProfilePageType} from "../../../redux/profile-reducer";
+import Preloader from "../../common/preloader/Preloader";
+import myAvatar from "../../img/photo_2022-07-09_11-29-57.jpg"
 
+type ProfileInfoPropsType = {
+state: ProfilePageType
+}
 
-const ProfileInfo = () => {
+const ProfileInfo = (props:ProfileInfoPropsType) => {
+    if (!props.state) {
+        return (
+            <Preloader/>
+        )
+    }
+
     return (
         <div>
             <div className={classes.phone}>
-                <img src={Phon} alt=""/>
+                <img src={Phone} alt=""/>
             </div>
             <div className={classes.avatarInfo}>
                 <div className={classes.avatar}>
-                    <img src={Photo} alt=""/>
+                    <img src={props.state.userProfile?.photos.large
+                        ? props.state.userProfile.photos.large
+                        : myAvatar} alt=""/>
                 </div>
                 <div>
-                    <h2>Pavel.K</h2>
-                    <p>Date of Birth: 01.02.94</p>
-                    <p>City: Minsk</p>
+                    <h2>{props.state.userProfile?.fullName}</h2>
+                    <p>{props.state.userProfile?.aboutMe}</p>
                 </div>
             </div>
             <div>

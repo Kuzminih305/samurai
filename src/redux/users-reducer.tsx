@@ -8,14 +8,14 @@ const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
 
 export type UsersType = {
     name: string
-    "id": string
-    "uniqueUrlName": null
-    "photos": {
-        "small": null
-        "large": null
+    id: number
+    uniqueUrlName: null
+    photos: {
+        "small": string
+        "large": string
     },
-    "status": null
-    "followed": boolean
+    status: null
+    followed: boolean
 }
 
 export type UsersPageType = {
@@ -23,6 +23,7 @@ export type UsersPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 
 }
 
@@ -30,8 +31,9 @@ export type UsersPageType = {
 let initialState = {
     users: [],
     pageSize: 10,
-    totalUsersCount: 1,
-    currentPage: 1
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
         // {id: v1(), avatar: ava ,fullName: "Pasha.K", status: "I am a boss", followed: true, location: {city: "Minsk", country: "Belarus"} },
@@ -72,13 +74,13 @@ type SetUsersType = ReturnType<typeof setUsersAC>
 type setCurrentPage = ReturnType<typeof setCurrentPageAC>
 type setTotalUsersCount = ReturnType<typeof setTotalUsersCountAC>
 
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
     return {
         type: FOLLOW,
         userID
     }as const
 }
-export  const unfollowAC = (userID: string) => {
+export  const unfollowAC = (userID: number) => {
     return {
         type: UNFOLLOW,
         userID

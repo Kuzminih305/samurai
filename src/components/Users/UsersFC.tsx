@@ -1,7 +1,7 @@
-import React, {MouseEvent} from 'react';
+import React from 'react';
 import classes from "./Usere.module.css";
-import ava from "../img/avaBoy.jpg";
 import {UsersType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersFCPropsType = {
@@ -10,8 +10,8 @@ type UsersFCPropsType = {
     onPageChanged: (currentPage: number) => void
     currentPage: number
     usersPage: UsersType[]
-    follow: (userID: string) => void
-    unFollow: (userID: string) => void
+    follow: (userID: number) => void
+    unFollow: (userID: number) => void
 
 }
 
@@ -30,7 +30,7 @@ const UsersFC = (props: UsersFCPropsType) => {
             <div>
                 {pages.map(el => {
 
-                    const onClickHandler = (e: MouseEvent<HTMLSpanElement>) => {
+                    const onClickHandler = () => {
                         props.onPageChanged(el)
                     }
 
@@ -56,7 +56,9 @@ const UsersFC = (props: UsersFCPropsType) => {
                     <div className={classes.wrap} key={el.id}>
                         <div className={classes.ava_user}>
                             <div className={classes.avatar}>
-                                <img src={ava} alt={''}/>
+                                <NavLink to={'/profile/' + el.id}>
+                                    <img src={el.photos.small} alt={''}/>
+                                </NavLink>
                             </div>
                             <div>
                                 {el.followed
