@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./Usere.module.css";
-import {UsersType} from "../../redux/users-reducer";
+import {UsersType,} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 
 
@@ -10,11 +10,10 @@ type UsersFCPropsType = {
     onPageChanged: (currentPage: number) => void
     currentPage: number
     usersPage: UsersType[]
-    follow: (userID: number) => void
-    unFollow: (userID: number) => void
-
+    userFollowThunkCreator: (userId: number) => void
+    followingInProgress: Array<number>
+    userUnFollowThunkCreator: (userId: number) => void
 }
-
 
 const UsersFC = (props: UsersFCPropsType) => {
 
@@ -23,7 +22,6 @@ const UsersFC = (props: UsersFCPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
 
     return (
         <div>
@@ -35,7 +33,7 @@ const UsersFC = (props: UsersFCPropsType) => {
                     }
 
                     return (
-                        <span className={props.currentPage === el ? classes.selectedPage : ""}
+                        <span  className={props.currentPage === el ? classes.selectedPage : ""}
                               onClick={onClickHandler}>{el}</span>
                     )
                 })}
@@ -44,12 +42,12 @@ const UsersFC = (props: UsersFCPropsType) => {
             {props.usersPage.map(el => {
 
 
-                const onClickFollowHandler = () => {
-                    props.follow(el.id)
-                }
-                const onClickUnFollowHandler = () => {
-                    props.unFollow(el.id)
-                }
+                const onClickFollowHandler = () => props.userFollowThunkCreator(el.id)
+
+                const onClickUnFollowHandler = () => props.userUnFollowThunkCreator(el.id)
+
+
+                const buttonDisabled = props.followingInProgress.some(id => id === el.id)
 
 
                 return (
@@ -62,10 +60,10 @@ const UsersFC = (props: UsersFCPropsType) => {
                             </div>
                             <div>
                                 {el.followed
-                                    ? <button className={classes.btn_follow}
-                                              onClick={onClickFollowHandler}>Follow</button>
-                                    : <button className={classes.btn_unfollow}
-                                              onClick={onClickUnFollowHandler}>Unfollow</button>}
+                                    ? <button disabled={buttonDisabled}  className={classes.btn_unfollow}
+                                              onClick={onClickUnFollowHandler}>Unfollow</button>
+                                    : <button disabled={buttonDisabled}  className={classes.btn_follow}
+                                          onClick={onClickFollowHandler}>Follow</button>}
                             </div>
                         </div>
                         <div className={classes.info_wrap}>

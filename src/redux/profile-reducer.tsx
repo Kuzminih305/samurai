@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 import {ActionsTypes} from "./store";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
 
 
 const ADD_POST = "ADD-POST";
@@ -93,4 +95,17 @@ export const setUserProfileAC = (userProfile: UserProfileType) => {
         type: "SET_USER_PROFILE",
         userProfile
     }as const
+}
+
+
+//----------THUNK---------------
+
+export const getUserProfileInfoThunkCreator = (userId: string) => {
+
+    return (dispatch: Dispatch) => {
+        profileAPI.getProfileInfo(userId)
+            .then(data => {
+                dispatch(setUserProfileAC(data))
+            })
+    }
 }

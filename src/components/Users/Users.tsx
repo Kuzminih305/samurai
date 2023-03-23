@@ -39,7 +39,7 @@ const getUsers = () => {
         // )
 
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
+            props.setUsersAC(response.data.items)
         })
     }
 }
@@ -53,10 +53,10 @@ const getUsers = () => {
 
 
                 const onClickFollowHandler = () => {
-                    props.follow(el.id)
+                    props.followAC(el.id)
                 }
                 const onClickUnFollowHandler = () => {
-                    props.unFollow(el.id)
+                    props.unfollowAC(el.id)
                 }
 
 
@@ -76,13 +76,8 @@ const getUsers = () => {
                     <div className={classes.info_wrap}>
                         <div className={classes.userInfo}>
                             <div>{el.name}</div>
-                            {/*<div>{el.status}</div>*/}
                         </div>
                     </div>
-                    {/*<div className={classes.location}>*/}
-                    {/*    <div>{"el.location.country"}</div>*/}
-                    {/*    <div>{"el.location.city"}</div>*/}
-                    {/*</div>*/}
                 </div>
             )})}
         </div>
