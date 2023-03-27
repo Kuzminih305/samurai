@@ -1,18 +1,15 @@
 import React from 'react';
 import Header from "./Header";
-
 import {connect} from "react-redux";
-import {AuthStatePropsType, setAuthUserData} from "../../redux/auth-reducer";
+import {AuthStatePropsType, getAuthUserDataThunkCreator} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {authAPI} from "../../api/api";
+
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
 
     componentDidMount() {
-        authAPI.authMy().then(data => {
-                  this.props.setAuthUserData(data.data)
-            })
+        this.props.getAuthUserDataThunkCreator()
     }
 
     render() {
@@ -22,19 +19,19 @@ class HeaderContainer extends React.Component<HeaderPropsType> {
     }
 }
 
-export type HeaderPropsType = SetAuthPropsType & MapStateToProps
+export type HeaderPropsType = SetAuthPropsType & MapStateToPropsType
 type SetAuthPropsType = {
-    setAuthUserData: (data: AuthStatePropsType) => void
+    getAuthUserDataThunkCreator: () => void
 }
 
-type MapStateToProps = {
+type MapStateToPropsType = {
    authState: AuthStatePropsType
 }
 
-const mapStateToProps = (state: AppStateType):MapStateToProps => {
+const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
         authState: state.auth
     }
 }
 
-export default connect (mapStateToProps, {setAuthUserData}) (HeaderContainer)
+export default connect (mapStateToProps, {getAuthUserDataThunkCreator}) (HeaderContainer)

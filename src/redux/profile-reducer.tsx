@@ -98,7 +98,7 @@ export const setUserProfileAC = (userProfile: UserProfileType) => {
 }
 
 
-//----------THUNK---------------
+//----------THUNK---------------------------------------------------------
 
 export const getUserProfileInfoThunkCreator = (userId: string) => {
 

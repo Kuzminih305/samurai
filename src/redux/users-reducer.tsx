@@ -36,7 +36,7 @@ export type UsersPageType = {
 let initialState = {
     users: [],
     pageSize: 10,
-    totalUsersCount: 100,
+    totalUsersCount: 102,
     currentPage: 1,
     isLoading: false,
     followingInProgress: []

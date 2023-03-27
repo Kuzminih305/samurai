@@ -7,27 +7,10 @@ import {Dispatch} from "redux";
 
 
 
-// const DialogsContainer = () => {
-//
-//     return (
-//         <div></div>
-//         // <StoreContext.Consumer>
-//         //     {(store) => {
-//         //         const dialogsPageState = store.getState().dialogPage
-//         //         const onSendMessageAC = () => store.dispatch(sendMessageAC())
-//         //         const onUpdateNewMessageTextAC = (body: string) => store.dispatch(updateNewMessageTextAC(body))
-//         //
-//         //         return <Dialogs dialogsPageState={dialogsPageState}
-//         //                      onSendMessageAC={onSendMessageAC}
-//         //                      onUpdateNewMessageTextAC={onUpdateNewMessageTextAC}/>
-//         //     }}
-//         // </StoreContext.Consumer>
-//     );
-// };
-
 export type MyDialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 type MapStateToPropsType = {
     dialogPage: DialogPageType
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     onSendMessage: () => void
@@ -36,7 +19,8 @@ type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
-        dialogPage: state.dialogPage
+        dialogPage: state.dialogPage,
+        isAuth: state.auth.isAuth
     }
 }
 

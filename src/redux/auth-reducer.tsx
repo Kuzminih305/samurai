@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA"
 
@@ -17,14 +19,15 @@ let initialState: AuthStatePropsType = {
 }
 
 
-export const authReducer = (state:AuthStatePropsType = initialState, action: ActionsType) => {
+export const authReducer = (state:AuthStatePropsType = initialState, action: ActionsType):AuthStatePropsType => {
     switch (action.type) {
         case SET_AUTH_USER_DATA:
             return {...state,
                 id: action.data.id,
                 login: action.data.login,
                 email: action.data.email,
-                isAuth: true}
+                isAuth: true
+            }
         default:
             return state;
 
@@ -40,6 +43,18 @@ export const setAuthUserData = (data: AuthStatePropsType) => {
         type: SET_AUTH_USER_DATA,
         data
     } as const
+}
+
+//----------------THUNK----------------------------------
+export const getAuthUserDataThunkCreator = () => {
+
+    return (dispatch: Dispatch) => {
+        authAPI.authMy()
+            .then(response => {
+                if(response.data.resultCode === 0)
+            dispatch(setAuthUserData(response.data.data))
+        })
+    }
 }
 
 
