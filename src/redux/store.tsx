@@ -1,4 +1,10 @@
-import {AddPostActionType, ProfilePageType, SetUserProfile, UpdateNewPostMessageTextType} from "./profile-reducer";
+import {
+    AddPostActionType,
+    ProfilePageType,
+    SetProfileStatus,
+    SetUserProfile,
+    UpdateNewPostMessageTextType
+} from "./profile-reducer";
 import {DialogPageType, SendMessageType, UpdateNewMessageTextType} from "./dialog-reducer";
 
 
@@ -13,7 +19,7 @@ export type StoreType = {
     dispatch : (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostActionType | UpdateNewMessageTextType | SendMessageType | UpdateNewPostMessageTextType | SetUserProfile
+export type ActionsTypes = AddPostActionType | UpdateNewMessageTextType | SendMessageType | UpdateNewPostMessageTextType | SetUserProfile | SetProfileStatus
 
 
 //  export const store: StoreType = {

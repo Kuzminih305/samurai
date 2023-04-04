@@ -40,7 +40,16 @@ export const authAPI = {
     }
 }
 
-export const profileAPI = {
+
+export const profileStatusAPI = {
+    getProfileStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
+            .then(response => response.data)
+    },
     getProfileInfo(userId: string) {
         return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => response.data)

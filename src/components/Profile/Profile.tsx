@@ -5,12 +5,16 @@ import {ProfilePageType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     state: ProfilePageType
+    status: string
+    updateProfileStatusThunkCreator: (status: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
 
     return <div>
-        <ProfileInfo state={props.state}/>
+        <ProfileInfo state={props.state}
+                     status={props.status}
+                     updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}/>
         <MyPostsContainer/>
     </div>
 }
